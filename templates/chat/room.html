@@ -1,0 +1,18 @@
+{% extends 'chat/base.html' %}
+{% load static %}
+{% block title %}{{ room.name }}{% endblock %}
+{% block content %}
+<div class="p-10 text-center">
+    <h1 class="text-3xl lg:text-6xl text-white">{{ room.name }}</h1>
+</div>
+<div class="lg:w-2/4 mx-4 lg:mx-auto  p-5 mx-auto bg-red-300 rounded">
+    <div id="chat-text" class="w-full p-4 bg-white rounded"></div>
+    <input id="input" type="text" class="w-full mt-1 px-4 py-2 rounded" placeholder="Type your message here...">
+    <input id="submit" type="button" value="Send"
+        class="mt-3 px-4 py-2 rounded text-white bg-rose-700 hover:bg-rose-600 w-full">
+    <button onclick='location.href ="/"' class="mt-3 px-4 py-2 rounded text-rose-700 border-2 border-rose-700 hover:bg-rose-700 hover:text-white w-full">Leave</button>
+</div>
+<div id="websocket-url" data-url="{{ websocket_url }}"></div>
+{{ request.user.first_name|json_script:"first_name" }}
+<script src="{% static 'js/room.js' %}"></script>
+{% endblock %}

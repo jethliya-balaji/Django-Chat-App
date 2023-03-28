@@ -1,0 +1,44 @@
+{% extends 'chat/base.html' %}
+{% load widget_tweaks %}
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+<div class="my-10 text-center">
+    <h1 class="text-3xl lg:text-5xl text-white">Sign Up</h1>
+</div>
+<form method="POST" class="w-4/5 lg:w-1/3 px-5 py-6 mx-auto bg-red-300 rounded">
+    {% csrf_token %}
+    {% if form.errors %}
+    {% for field in form %}
+    {% for error in field.errors %}
+    <div class="mb-2 p-2 rounded bg-red-600 text-white text-center">
+        <p>{{ error|escape }}</p>
+    </div>
+    {% endfor %}
+    {% endfor %}
+    {% endif %}
+    <div class="mb-5">
+        <label class="text-white">Username :</label>
+        {% render_field form.username class="w-full mt-1 px-4 py-2 rounded" %}
+    </div>
+    <div class="mb-5">
+        <label class="text-white">Name :</label>
+        {% render_field form.first_name class="w-full mt-1 px-4 py-2 rounded"%}
+    </div>
+    <div class="mb-5">
+        <label class="text-white">Password :</label>
+        {% render_field form.password1 class="w-full mt-1 px-4 py-2 rounded" %}
+    </div>
+    <div class="mb-5">
+        <label class="text-white">Confirm Password :</label>
+        {% render_field form.password2 class="w-full mt-1 px-4 py-2 rounded" %}
+    </div>
+    <button class="px-3 py-2 rounded text-white bg-rose-700 hover:bg-rose-600 w-full">Sign Up</button>
+    <p class="mt-4 text-sm text-white text-center">
+        Already have an account?
+        <a href="{% url 'signin' %}"
+            class="font-medium text-rose-600 transition-all duration-200 hover:text-rose-700 hover:underline focus:text-rose-700">
+            Sign In here >
+        </a>
+    </p>
+</form>
+{% endblock %}

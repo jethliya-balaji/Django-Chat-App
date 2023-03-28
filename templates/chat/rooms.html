@@ -1,0 +1,69 @@
+{% extends 'chat/base.html' %}
+{% block title %}Rooms{% endblock %}
+{% block content %}
+<div class="p-10 text-center">
+    <h1 class="text-3xl lg:text-6xl text-white">Rooms</h1>
+</div>
+
+<h1 class="text-2xl lg:text-3xl text-white px-3">My Rooms:</h1>
+<div class="w-full flex flex-wrap items-center">
+    {% for room in my_rooms %}
+    <div class="w-full lg:w-1/4 p-2">
+        <div class="p-4 bg-white shadow rounded">
+            <div class="flex justify-between">
+                <h2 class="mb-5 text-xl">{{room.name}}
+                    <p class="text-sm">Created By You ({{room.created_by.first_name}})</p>
+                </h2>
+                {% if room.private_room %}
+                <box-icon name='lock' type='solid'></box-icon>
+                {% else %}
+                <box-icon name='globe'></box-icon>
+                {% endif %}
+            </div>
+
+            <div class="flex justify-between">
+                <a href="{{room.get_absolute_url}}"
+                class="w-full px-5 py-3 m-1 block rounded text-lg text-center text-white bg-rose-600 hover:bg-rose-700">Join</a>
+                <a href="{% url 'edit_room' room.pk  %}"
+                class="w-full px-5 py-3 m-1 block rounded text-lg text-center text-rose-600 border-2 border-rose-600 hover:bg-rose-600 hover:text-white">Edit</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-center w-full p-4 m-3 bg-white shadow rounded">
+        You have not create any room.
+        <a href="{% url 'create_room' %}"
+            class="font-medium text-rose-600 transition-all duration-200 hover:text-rose-700 hover:underline focus:text-rose-700">
+            Create One here
+        </a>
+    </p>
+    {% endfor %}
+</div>
+
+<h1 class="text-2xl lg:text-3xl text-white px-3 mt-8">Create By Public:</h1>
+<div class="w-full flex flex-wrap items-center">
+    {% for room in rooms %}
+    <div class="w-full lg:w-1/4 px-3 py-3">
+        <div class="p-4 bg-white shadow rounded">
+            <div class="flex justify-between">
+                <h2 class="mb-5 text-xl">{{room.name}}
+                    <p class="text-sm">Created By {{room.created_by.first_name}}</p>
+                </h2>
+                {% if room.private_room %}
+                <box-icon name='lock' type='solid'></box-icon>
+                {% else %}
+                <box-icon name='globe'></box-icon>
+                {% endif %}
+            </div>
+
+            <a href="{{room.get_absolute_url}}"
+                class="px-5 py-3 block rounded text-lg text-center text-white bg-rose-600 hover:bg-rose-700">Join</a>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-center w-full p-4 m-3 bg-white shadow rounded">
+        Nothing to see here yet.
+    </p>
+    {% endfor %}
+</div>
+{% endblock %}

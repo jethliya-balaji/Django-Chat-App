@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdn.tailwindcss.com"></script>    
+        <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+        <script src="{% static 'js/boxicon@2.1.4.js' %}"></script>
+        <title>{% block title %}{% endblock %} | Simple Chat App Demo | By Balaji Jethliya</title>
+    </head>
+
+    <body class="bg-rose-500 container mx-auto px-2 lg:px-20 py-3">
+        <nav class="flex items-center justify-between px-4 py-3 bg-rose-600 rounded">
+            <div class="text-right">
+                <a href="/" class="text-xl lg:text-2xl text-white">The Chat App</a><br><small class="text-sm lg:text-base text-right text-white"> by Balaji Jethliya</small>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'create_room' %}" class="px-3 py-2 text-sm lg:text-lg text-white hover:text-gray-300">Create Room</a>
+
+                    <a href="{% url 'signout' %}" class="px-3 py-2 rounded text-sm lg:text-lg text-white bg-rose-700 hover:bg-rose-800">Sign Out</a>
+                {% endif %}
+            </div>
+        </nav>
+
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>
