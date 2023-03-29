@@ -1,3 +1,6 @@
+local-cdn/
+node_modules
+
 # Django #
 *.log
 *.pot
