@@ -152,6 +152,12 @@ STATIC_ROOT = BASE_DIR.parent / 'local-cdn' / 'static'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels.layers.InMemoryChannelLayer"
+#     }
+# }
+
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
