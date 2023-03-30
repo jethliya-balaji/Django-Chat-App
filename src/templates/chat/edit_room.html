@@ -7,7 +7,7 @@
     <h1 class="text-3xl lg:text-5xl text-white">Edit Room : {{room.name}}</h1>
 </div>
 <div class="w-4/5 lg:w-1/3 px-5 py-6 mx-auto bg-red-300 rounded">
-    <form method="POST">
+    <form method="POST" autocomplete="off">
         {% csrf_token %}
 
         {% if form.errors %}
